@@ -9,8 +9,10 @@ const doc = {
   schemes: ['http'],
 };
 
-const outputFile = './swagger-output.json';
+const outputFile = './swagger_output.json';
+
 const endpointsFiles = ['./Router/studentrouter.ts']; // Path to your routes file
+
 
 swaggerAutogen()(outputFile, endpointsFiles).then(() => {
   console.log('Swagger documentation generated!');

@@ -1,6 +1,6 @@
 import express from 'express'
 
-import { createStudent,getAllStudent, getOneStudent,updateStudent,deleteStudent }  from '../Controller/studentcontroller'
+import { createStudent,getAllStudent, getOneStudent,updateStudent,deleteStudent,getStudentBySL }  from '../Controller/studentcontroller'
 
 const router = express.Router()
 
@@ -14,6 +14,10 @@ router.get("/getOneStudent/:collegeId",getOneStudent)
 router.put("/updateStudent/:id",updateStudent)
 
 router.delete("/deleteStudent/:id",deleteStudent)
+
+
+router.get("/getStudentBySL",getStudentBySL)  // new add 21 
+
 
 
 export default router

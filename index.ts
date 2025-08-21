@@ -16,8 +16,6 @@ const swaggerSpec = swaggerJsDoc(swaggerOptions);
 
 
 
-
-
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -34,8 +32,6 @@ app.use(cors());
 // Serve separate Swagger docs
 app.use("/api-docs/user", swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 // app.use("/api-docs/student", swaggerUI.serve, swaggerUI.setup(swaggerSpec2));
-
-
 
 
 

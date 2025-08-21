@@ -1,7 +1,26 @@
 import express from "express";
-import { CreateUser, getUserByEmail, getUserById ,getAllUser, updateUser, deleteUser } from "../Controller/usercontroller";
+import {
+  CreateUser,
+  getUserByEmail,
+  getUserById,
+  getAllUser,
+  updateUser,
+  deleteUser,
+  getUserBySl
+} from "../Controller/usercontroller";
 
 const router = express.Router();
+
+
+
+
+
+/**
+ * @swagger
+ * tags:
+ *   name: User
+ *   description: User management endpoints
+ */
 
 /**
  * @swagger
@@ -15,6 +34,11 @@ const router = express.Router();
  *         application/json:
  *           schema:
  *             type: object
+ *             required:
+ *               - firstName
+ *               - lastName
+ *               - email
+ *               - password
  *             properties:
  *               firstName:
  *                 type: string
@@ -28,21 +52,22 @@ const router = express.Router();
  *                 type: string
  *               password:
  *                 type: string
- *              
  *     responses:
  *       200:
  *         description: User created successfully
  */
 router.post("/CreateUser", CreateUser);
 
+
+
 /**
  * @swagger
  * /user/getUserByEmail/{email}:
  *   get:
- *     summary: Get a specific user by email
+ *     summary: Get a user by email
  *     tags: [User]
  *     parameters:
- *       - in: path 
+ *       - in: path
  *         name: email
  *         required: true
  *         schema:
@@ -53,15 +78,14 @@ router.post("/CreateUser", CreateUser);
  */
 router.get("/getUserByEmail/:email", getUserByEmail);
 
-
 /**
  * @swagger
  * /user/getUserById/{id}:
  *   get:
- *     summary: Get a specific user by ID
+ *     summary: Get a user by ID
  *     tags: [User]
  *     parameters:
- *       - in: path 
+ *       - in: path
  *         name: id
  *         required: true
  *         schema:
@@ -73,17 +97,32 @@ router.get("/getUserByEmail/:email", getUserByEmail);
 router.get("/getUserById/:id", getUserById);
 
 
+
+
+
 /**
  * @swagger
  * /user/getAllUser:
  *   get:
  *     summary: Get all users
  *     tags: [User]
+ *     parameters:
+ *       - in: query
+ *         name: skip
+ *         required: false
+ *         schema:
+ *           type: integer
+ *       - in: query
+ *         name: limit
+ *         required: false
+ *         schema:
+ *           type: integer
  *     responses:
  *       200:
  *         description: A list of all users
  */
 router.get("/getAllUser", getAllUser);
+
 
 /**
  * @swagger
@@ -139,5 +178,32 @@ router.put("/updateUser/:id", updateUser);
  *         description: User deleted successfully
  */
 router.delete("/deleteUser/:id", deleteUser);
+
+
+
+
+
+/**
+ * @swagger
+ * /user/getUserBySl:
+ *   get:
+ *     summary: Get users with skip and limit (pagination)
+ *     tags: [User]
+ *     parameters:
+ *       - in: query
+ *         name: skip
+ *         required: false
+ *         schema:
+ *           type: integer
+ *       - in: query
+ *         name: limit
+ *         required: false
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Users retrieved successfully
+ */
+router.get("/getUserBySl", getUserBySl);
 
 export default router;

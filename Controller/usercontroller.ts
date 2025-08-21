@@ -92,7 +92,12 @@ export const getUserById = async (req: Request, res: Response) => {
 
 export const getAllUser = async (req:Request,res:Response) =>{
 
-  const data  = await User.find()
+
+  const limit   =  Number(req.query.limit)
+
+  const skip =  Number(req.query.skip)
+
+  const data  = await User.find().skip(skip).limit(limit)           // .sort({age:-1})  arrange descending order -1 
 
   console.log("data",data)
 
@@ -103,9 +108,6 @@ export const getAllUser = async (req:Request,res:Response) =>{
 
   return res.status(200).send({message:"All User",data})
 }
-
-
-
 
 
 // update user 
@@ -139,7 +141,6 @@ export const updateUser =  async(req:Request,res:Response) => {
 }
 
 
-
 // delete user 
 
 export const deleteUser = async(req:Request,res:Response) =>{
@@ -155,9 +156,37 @@ export const deleteUser = async(req:Request,res:Response) =>{
     return res.status(400).send({message:"User not found try again!"})
   }
 
-
   const result = await User.findByIdAndDelete(id)
 
   return res.status(200).send({message:"user delete successfully"})
 
 }
+
+
+// getUserBySl
+
+export const getUserBySl =  async (req:Request ,res:Response) =>{
+
+  const limit = Number(req.query.limit) 
+
+  const skip =  Number(req.query.skip)
+  
+  const data =  await User.find().skip(skip).limit(limit)
+
+  if(!data)
+  {
+    return res.status(400).send({message:"Data not found try again!"})
+  }
+
+  if(data.length === 0)
+  {
+    return res.status(400).send({message:"Data is empty not found chek skip value  try again!"})
+  }
+
+  return res.status(200).send({message:"User Data :",data})
+
+}
+
+
+
+

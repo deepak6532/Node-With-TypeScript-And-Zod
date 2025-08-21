@@ -23,7 +23,8 @@ export const createStudent = async (req: Request, res: Response) => {
         return res.status(400).send({ message: "Student already exists " })
     }
 
-    // generate a unique college id 
+    // generate a  6 digit unique college id  autmoatically and save the databse 
+
     let collegeid= ""
     let length =6
     for(let  i=0; i<length; i++)
@@ -49,7 +50,12 @@ export const createStudent = async (req: Request, res: Response) => {
 
 export const getAllStudent = async (req:Request,res:Response) =>{
 
-    const data =  await Student.find()
+
+    const limit  = Number(req.query.limit)
+
+    const skip = Number(req.query.skip)
+
+    const data =  await Student.find().skip(skip).limit(limit)
 
     if(!data)
     {
@@ -109,7 +115,6 @@ export const updateStudent =  async(req:Request,res:Response) =>
 export const deleteStudent = async(req:Request,res:Response) =>{
 
     const id = req.params.id
-
     const alreadyStudent = await Student.findById(id)
 
     if(!alreadyStudent)
@@ -119,8 +124,28 @@ export const deleteStudent = async(req:Request,res:Response) =>{
 
     console.log("alreadyStudent Check:",alreadyStudent)
 
-
     const result = await Student.findByIdAndDelete(id)
 
     return res.status(200).send({message:"Student Delete Successfully :",result})
 }
+
+
+// get student by limit and skip 
+
+export const getStudentBySL = async (req:Request, res:Response) => {
+
+    const limit = Number(req.query.limit);
+    
+    const skip = Number(req.query.skip) 
+
+    const data = await Student.find().skip(skip).limit(limit);
+
+    if (!data) {
+        return res.status(400).send({ message: "Data not found " });
+    }
+
+    return res.status(200).send({ message: "student Data", data });
+};
+
+
+

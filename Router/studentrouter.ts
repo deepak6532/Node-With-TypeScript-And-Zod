@@ -1,22 +1,20 @@
 import express from 'express'
 
-import { createStudent,getAllStudent, getOneStudent,updateStudent,deleteStudent,getStudentBySL }  from '../Controller/studentcontroller'
+import { createStudent,getAllStudent, getOneStudent,updateStudent,deleteStudent }  from '../Controller/studentcontroller'
 
 const router = express.Router()
 
 
-router.post("/createStudent",createStudent)
+router.post("/",createStudent)
 
-router.get("/getAllStudent",getAllStudent)
+router.get("/",getAllStudent)
 
-router.get("/getOneStudent/:collegeId",getOneStudent)
+router.get("/:collegeId",getOneStudent)
 
-router.put("/updateStudent/:id",updateStudent)
+router.put("/:id",updateStudent)
 
-router.delete("/deleteStudent/:id",deleteStudent)
+router.delete("/:id",deleteStudent)
 
-
-router.get("/getStudentBySL",getStudentBySL)  // new add 21 
 
 
 

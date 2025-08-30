@@ -3,6 +3,9 @@ import { studentSchema, Student } from '../Model/studentschema'
 import type { StudentType } from '../Model/studentschema'
 
 
+
+
+
 export const createStudent = async (req: Request, res: Response) => {
     const parsedData = studentSchema.safeParse(req.body)
 
@@ -49,7 +52,6 @@ export const createStudent = async (req: Request, res: Response) => {
 // get all Student
 
 export const getAllStudent = async (req:Request,res:Response) =>{
-
 
     const limit  = Number(req.query.limit)
 
@@ -130,22 +132,7 @@ export const deleteStudent = async(req:Request,res:Response) =>{
 }
 
 
-// get student by limit and skip 
 
-export const getStudentBySL = async (req:Request, res:Response) => {
-
-    const limit = Number(req.query.limit);
-    
-    const skip = Number(req.query.skip) 
-
-    const data = await Student.find().skip(skip).limit(limit);
-
-    if (!data) {
-        return res.status(400).send({ message: "Data not found " });
-    }
-
-    return res.status(200).send({ message: "student Data", data });
-};
 
 
 

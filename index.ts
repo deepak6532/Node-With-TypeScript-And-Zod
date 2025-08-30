@@ -3,6 +3,10 @@ import cors from "cors";
 import mongoose from "mongoose";
 
 import userRouter from "./Router/userrouter";  
+
+
+
+
 import studentRouter from "./Router/studentrouter";
 
 
@@ -37,6 +41,7 @@ app.use("/api-docs/user", swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 // Routers
 app.use("/user", userRouter); 
+
 app.use("/student", studentRouter);
 
 

@@ -1,19 +1,13 @@
 import express from "express";
 import {
   CreateUser,
-  getUserByEmail,
   getUserById,
   getAllUser,
   updateUser,
   deleteUser,
-  getUserBySl
 } from "../Controller/usercontroller";
 
 const router = express.Router();
-
-
-
-
 
 /**
  * @swagger
@@ -24,7 +18,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /user/CreateUser:
+ * /user:
  *   post:
  *     summary: Create a new user
  *     tags: [User]
@@ -53,34 +47,14 @@ const router = express.Router();
  *               password:
  *                 type: string
  *     responses:
- *       200:
+ *       201:
  *         description: User created successfully
  */
-router.post("/CreateUser", CreateUser);
-
-
+router.post("/", CreateUser);
 
 /**
  * @swagger
- * /user/getUserByEmail/{email}:
- *   get:
- *     summary: Get a user by email
- *     tags: [User]
- *     parameters:
- *       - in: path
- *         name: email
- *         required: true
- *         schema:
- *           type: string
- *     responses:
- *       200:
- *         description: User retrieved successfully
- */
-router.get("/getUserByEmail/:email", getUserByEmail);
-
-/**
- * @swagger
- * /user/getUserById/{id}:
+ * /user/{id}:
  *   get:
  *     summary: Get a user by ID
  *     tags: [User]
@@ -94,15 +68,11 @@ router.get("/getUserByEmail/:email", getUserByEmail);
  *       200:
  *         description: User retrieved successfully
  */
-router.get("/getUserById/:id", getUserById);
-
-
-
-
+router.get("/:id", getUserById);
 
 /**
  * @swagger
- * /user/getAllUser:
+ * /user:
  *   get:
  *     summary: Get all users
  *     tags: [User]
@@ -121,12 +91,11 @@ router.get("/getUserById/:id", getUserById);
  *       200:
  *         description: A list of all users
  */
-router.get("/getAllUser", getAllUser);
-
+router.get("/", getAllUser);
 
 /**
  * @swagger
- * /user/updateUser/{id}:
+ * /user/{id}:
  *   put:
  *     summary: Update a user by ID
  *     tags: [User]
@@ -159,11 +128,11 @@ router.get("/getAllUser", getAllUser);
  *       200:
  *         description: User updated successfully
  */
-router.put("/updateUser/:id", updateUser);
+router.put("/:id", updateUser);
 
 /**
  * @swagger
- * /user/deleteUser/{id}:
+ * /user/{id}:
  *   delete:
  *     summary: Delete a user by ID
  *     tags: [User]
@@ -177,33 +146,6 @@ router.put("/updateUser/:id", updateUser);
  *       200:
  *         description: User deleted successfully
  */
-router.delete("/deleteUser/:id", deleteUser);
-
-
-
-
-
-/**
- * @swagger
- * /user/getUserBySl:
- *   get:
- *     summary: Get users with skip and limit (pagination)
- *     tags: [User]
- *     parameters:
- *       - in: query
- *         name: skip
- *         required: false
- *         schema:
- *           type: integer
- *       - in: query
- *         name: limit
- *         required: false
- *         schema:
- *           type: integer
- *     responses:
- *       200:
- *         description: Users retrieved successfully
- */
-router.get("/getUserBySl", getUserBySl);
+router.delete("/:id", deleteUser);
 
 export default router;
